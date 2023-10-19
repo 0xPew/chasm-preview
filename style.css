@@ -39,6 +39,11 @@ body {
   background-color: #0056b3;
 }
 
+#submit:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
 br {
   margin: 10px 0;
 }
