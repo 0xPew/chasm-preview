@@ -1,12 +1,11 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
   const submitButton = document.getElementById("submit");
   const answerInput = document.getElementById("answer");
   const responseContainer = document.getElementById("response");
 
-  submitButton.addEventListener("click", function () {
+  const startLoadingAnimation = () => {
     submitButton.disabled = true;
     submitButton.classList.add("loading");
-    
     let dots = "";
     const addDot = () => {
       if (dots.length === 3) {
@@ -16,11 +15,24 @@ document.addEventListener("DOMContentLoaded", function () {
       }
       submitButton.textContent = `Scrying${dots}`;
     };
-
-    addDot();
-
     const dotInterval = setInterval(addDot, 500);
+    return dotInterval;
+  };
 
+  const stopLoadingAnimation = (dotInterval) => {
+    clearInterval(dotInterval);
+    submitButton.disabled = false;
+    submitButton.classList.remove("loading");
+    submitButton.textContent = "Scry";
+  };
+
+  const showResponse = (chosenCard, content) => {
+    responseContainer.style.display = "block";
+    responseContainer.textContent = "Card category: " + chosenCard + "\n\n" + content;
+  };
+
+  submitButton.addEventListener("click", () => {
+    const dotInterval = startLoadingAnimation();
     const inputValue = answerInput.value;
 
     const cards = [
@@ -48,14 +60,14 @@ document.addEventListener("DOMContentLoaded", function () {
       "The World"
     ];
 
-    const chooseRandomCard = () => { return cards[Math.floor(Math.random() * cards.length)];};
+    const chooseRandomCard = () => cards[Math.floor(Math.random() * cards.length)];
 
     const chosenCard = chooseRandomCard();
 
-    var myHeaders = new Headers();
+    const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
-    var raw = JSON.stringify({
+    const raw = JSON.stringify({
       "input": {
         "question": inputValue,
         "name": chosenCard,
@@ -63,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
 
-    var requestOptions = {
+    const requestOptions = {
       method: 'POST',
       headers: myHeaders,
       body: raw,
@@ -71,23 +83,15 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     fetch("https://pms.chasm.net/api/prompts/execute/31", requestOptions)
-      .then(response => response.json())
-      .then(result => {
+      .then((response) => response.json())
+      .then((result) => {
         const content = JSON.parse(result.content).quatrain;
-        clearInterval(dotInterval);
-        submitButton.disabled = false;
-        submitButton.classList.remove("loading");
-        submitButton.textContent = "Scry";
-
-        responseContainer.style.display = "block";
-
-        responseContainer.textContent = "Card category: " + chosenCard + "\n\n" + content;
+        stopLoadingAnimation(dotInterval);
+        showResponse(chosenCard, content);
       })
-      .catch(error => {
+      .catch((error) => {
         console.log('error', error);
-        clearInterval(dotInterval);
-        submitButton.disabled = false;
-        submitButton.classList.remove("loading");
+        stopLoadingAnimation(dotInterval);
         submitButton.textContent = "Error";
       });
   });
