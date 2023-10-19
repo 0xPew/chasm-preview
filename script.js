@@ -6,12 +6,43 @@ document.addEventListener("DOMContentLoaded", function () {
   submitButton.addEventListener("click", function () {
     const inputValue = answerInput.value;
 
+    const cards = [
+      "The Fool",
+      "The Magician",
+      "The High Priestess",
+      "The Empress",
+      "The Emperor",
+      "The Hierophant",
+      "The Lovers",
+      "The Chariot",
+      "Strength",
+      "The Hermit",
+      "Wheel of Fortune",
+      "Justice",
+      "The Hanged Man",
+      "Death",
+      "Temperance",
+      "The Devil",
+      "The Tower",
+      "The Star",
+      "The Moon",
+      "The Sun",
+      "Judgement",
+      "The World"
+    ];
+
+    const chooseRandomCard = () => { return cards[Math.floor(Math.random() * cards.length)];};
+
+    const chosenCard = chooseRandomCard();
+
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify({
       "input": {
-        "programming_language": inputValue
+        "question": inputValue,
+        "name": chosenCard,
+        "json_only": "format the result in JSON Object"
       }
     });
 
@@ -22,10 +53,10 @@ document.addEventListener("DOMContentLoaded", function () {
       redirect: 'follow'
     };
 
-    fetch("https://stagingpms.chasm.net/api/prompts/execute/64", requestOptions)
+    fetch("https://pms.chasm.net/api/prompts/execute/31", requestOptions)
       .then(response => response.json())
       .then(result => {
-        const content = result.content;
+        const content = JSON.parse(result.content).quatrain;
 
         responseContainer.style.display = "block";
 
