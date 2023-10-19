@@ -4,6 +4,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const responseContainer = document.getElementById("response");
 
   submitButton.addEventListener("click", function () {
+    submitButton.disabled = true;
+    submitButton.textContent = "Scrying...";
+
     const inputValue = answerInput.value;
 
     const cards = [
@@ -58,10 +61,17 @@ document.addEventListener("DOMContentLoaded", function () {
       .then(result => {
         const content = JSON.parse(result.content).quatrain;
 
+        submitButton.disabled = false;
+        submitButton.textContent = "Scry";
+
         responseContainer.style.display = "block";
 
         responseContainer.textContent = "Card category: " + chosenCard + "\n\n" + content;
       })
-      .catch(error => console.log('error', error));
+      .catch(error => {
+        console.log('error', error);
+        submitButton.disabled = false;
+        submitButton.textContent = "Error";
+      });
   });
 });
