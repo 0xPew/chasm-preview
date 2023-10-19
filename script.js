@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   submitButton.addEventListener("click", function () {
     submitButton.disabled = true;
+    submitButton.classList.add("loading");
     
     let dots = "";
     const addDot = () => {
@@ -75,6 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const content = JSON.parse(result.content).quatrain;
         clearInterval(dotInterval);
         submitButton.disabled = false;
+        submitButton.classList.remove("loading");
         submitButton.textContent = "Scry";
 
         responseContainer.style.display = "block";
@@ -85,6 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log('error', error);
         clearInterval(dotInterval);
         submitButton.disabled = false;
+        submitButton.classList.remove("loading");
         submitButton.textContent = "Error";
       });
   });

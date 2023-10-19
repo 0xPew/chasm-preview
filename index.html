@@ -1,15 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
   <title>Chasm Preview</title>
 </head>
 <body>
-  <p id="question">Your question for Tatarot to scry</p>
-  <input id="answer">
-  <br>
-  <button type="submit" id="submit">Scry</button>
-  <div id="response"></div>
+  <div class="container">
+    <div class="scry-container">
+      <label for="answer" class="question-label">Your question for Tatarot to scry</label>
+      <div class="input-button-container">
+        <input id="answer" class="answer-input" placeholder="Ask your question...">
+        <button type="submit" id="submit" class="scry-button">Scry</button>
+      </div>
+      <div id="response" class="response-container"></div>
+    </div>
+  </div>
   <script src="script.js"></script>
 </body>
 </html>
