@@ -5,7 +5,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
   submitButton.addEventListener("click", function () {
     submitButton.disabled = true;
-    submitButton.textContent = "Scrying...";
+    
+    let dots = "";
+    const addDot = () => {
+      if (dots.length === 3) {
+        dots = "";
+      } else {
+        dots += ".";
+      }
+      submitButton.textContent = `Scrying${dots}`;
+    };
+
+    addDot();
+
+    const dotInterval = setInterval(addDot, 500);
 
     const inputValue = answerInput.value;
 
@@ -60,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function () {
       .then(response => response.json())
       .then(result => {
         const content = JSON.parse(result.content).quatrain;
-
+        clearInterval(dotInterval);
         submitButton.disabled = false;
         submitButton.textContent = "Scry";
 
@@ -70,6 +83,7 @@ document.addEventListener("DOMContentLoaded", function () {
       })
       .catch(error => {
         console.log('error', error);
+        clearInterval(dotInterval);
         submitButton.disabled = false;
         submitButton.textContent = "Error";
       });
