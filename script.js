@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         responseContainer.style.display = "block";
 
-        responseContainer.textContent = content;
+        responseContainer.textContent = "Card category: " + chosenCard + "\n\n" + content;
       })
       .catch(error => console.log('error', error));
   });
