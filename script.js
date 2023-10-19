@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const startLoadingAnimation = () => {
     submitButton.disabled = true;
     submitButton.classList.add("loading");
+    submitButton.style.cursor = "not-allowed";
     let dots = "";
     const addDot = () => {
       if (dots.length === 3) {
@@ -23,6 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
     clearInterval(dotInterval);
     submitButton.disabled = false;
     submitButton.classList.remove("loading");
+    submitButton.style.cursor = "pointer";
     submitButton.textContent = "Scry";
   };
 
