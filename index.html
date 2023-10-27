@@ -22,12 +22,13 @@
       <h1>AI Priority Planner</h1>
       <p>Helps eliminate stress by picking what's important for you. There's only so much you can fit into 24 hours.</p>
       <div>
-        <span>Key in your tasks, separated by commas:</span>
+        <span>Key in your role and tasks, separated by commas:</span>
         <div class="input-container">
           <div class="input-box">
+            <input id="role-input" type="text" placeholder="Your role">
             <textarea id="text-input" placeholder="Your tasks"></textarea>
-            <button id="submit" class="circle-button"><i class="fas fa-check"></i></button>
           </div>
+          <button id="submit" class="circle-button"><i class="fas fa-check"></i></button>
         </div>
       </div>
       <div id="response" class="response-container"></div>
