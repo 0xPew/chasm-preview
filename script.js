@@ -65,6 +65,6 @@ submitButton.addEventListener("click", () => {
     })
     .catch(error => {
       stopLoadingAnimation();
-      submitButton.textContent = "Error";
+      responseContainer.innerHTML = "<h2 class='list-heading'>Error, please try again later</h2>";
     });
 });
