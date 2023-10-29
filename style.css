@@ -158,3 +158,9 @@ textarea {
   text-align: left;
   white-space: pre-line;
 }
+
+.list-heading {
+  font-weight: bold;
+  font-size: 24px;
+  margin: 0;
+}

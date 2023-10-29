@@ -19,19 +19,19 @@ const showResponse = (content) => {
   responseContainer.style.display = "block";
 
   const parsedContent = JSON.parse(content);
-  let formattedContent = "Keep Task List:\n";
+  let formattedContent = "<h2 class='list-heading'>Keep Task List:</h2>";
 
   for (const task of parsedContent.keep_task_list) {
     formattedContent += `- ${Object.keys(task)[0]}: ${Object.values(task)[0]}\n`;
   }
 
-  formattedContent += "\nDrop Task List:\n";
+  formattedContent += "\n<h2 class='list-heading'>Drop Task List:</h2>";
 
   for (const task of parsedContent.drop_task_list) {
     formattedContent += `- ${Object.keys(task)[0]}: ${Object.values(task)[0]}\n`;
   }
 
-  responseContainer.textContent = formattedContent;
+  responseContainer.innerHTML = formattedContent;
 };
 
 submitButton.addEventListener("click", () => {
