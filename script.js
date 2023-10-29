@@ -17,22 +17,35 @@ const stopLoadingAnimation = () => {
 
 const showResponse = (content) => {
   responseContainer.style.display = "block";
-  responseContainer.textContent = content;
+
+  const parsedContent = JSON.parse(content);
+  let formattedContent = "Keep Task List:\n";
+
+  for (const task of parsedContent.keep_task_list) {
+    formattedContent += `- ${Object.keys(task)[0]}: ${Object.values(task)[0]}\n`;
+  }
+
+  formattedContent += "\nDrop Task List:\n";
+
+  for (const task of parsedContent.drop_task_list) {
+    formattedContent += `- ${Object.keys(task)[0]}: ${Object.values(task)[0]}\n`;
+  }
+
+  responseContainer.textContent = formattedContent;
 };
 
 submitButton.addEventListener("click", () => {
-  startLoadingAnimation(); // Start loading animation when the button is clicked
-
+  startLoadingAnimation();
   const roleValue = roleInput.value;
   const inputValue = textInput.value;
-
   const myHeaders = new Headers();
+
   myHeaders.append("Content-Type", "application/json");
 
   const raw = JSON.stringify({
-    "input": {
-      "request": inputValue,
-      "job_role": roleValue
+    input: {
+      request: inputValue,
+      job_role: roleValue
     }
   });
 
@@ -43,16 +56,15 @@ submitButton.addEventListener("click", () => {
     redirect: 'follow'
   };
 
-  fetch("https://pms.chasm.net/api/prompts/execute/220", requestOptions)
+  fetch("https://pms.chasm.net/api/prompts/execute/204", requestOptions)
     .then(response => response.json())
     .then(result => {
       const content = result.content;
-      stopLoadingAnimation(); // Stop loading animation when the response is received
+      stopLoadingAnimation();
       showResponse(content);
     })
     .catch(error => {
-      console.log('error', error);
-      stopLoadingAnimation(); // Stop loading animation in case of an error
+      stopLoadingAnimation();
       submitButton.textContent = "Error";
     });
 });
