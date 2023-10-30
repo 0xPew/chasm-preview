@@ -45,10 +45,10 @@ header img {
 }
 
 #content-container {
-  background-color: #fff;
-  padding: 20px;
+  /* background-color: #fff; */
+  padding: 0px 20px;
   border-radius: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); */
   margin: 20px;
 }
 
@@ -61,18 +61,18 @@ header div {
 h1 {
   font-family: 'Cormorant Infant', serif;
   text-align: center;
-  font-size: 80px;
+  font-size: 50px;
   margin: 20px 0;
-  color: #333;
+  color: #fff;
 }
 
 p {
   font-family: 'Karla', sans-serif;
   text-align: center;
-  font-size: 26px;
+  font-size: 20px;
   margin-top: 10px;
   margin-bottom: 30px;
-  color: #666;
+  color: #fff;
 }
 
 a {
@@ -81,9 +81,9 @@ a {
 
 span {
   font-family: 'Karla', sans-serif;
-  font-size: 21px;
+  font-size: 16px;
   display: block;
-  color: #888;
+  color: #fff;
 }
 
 .circle-button {
@@ -125,7 +125,7 @@ span {
 
 #role-input {
   font-family: 'Karla', sans-serif;
-  font-size: 22px;
+  font-size: 18px;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -134,7 +134,7 @@ span {
 
 textarea {
   font-family: 'Karla', sans-serif;
-  font-size: 22px;
+  font-size: 18px;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -148,11 +148,11 @@ textarea {
 .response-container {
   display: none;
   font-family: 'Karla', sans-serif;
-  font-size: 21px;
+  font-size: 18px;
   color: #333;
   background-color: #fff;
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 5px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   margin-top: 20px;
   text-align: left;
@@ -161,6 +161,6 @@ textarea {
 
 .list-heading {
   font-weight: bold;
-  font-size: 24px;
+  font-size: 18px;
   margin: 0;
 }
