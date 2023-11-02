@@ -162,8 +162,8 @@ textarea {
 
 @media (max-width: 768px) and (max-device-width: 480px) {
   body {
-    background: url(img/bg.jpeg) no-repeat center center;
-    background-size: 100% 100%;
+    background: url(img/bg.jpeg) no-repeat center center fixed;
+    background-size: cover;
   }
 
   header img {
