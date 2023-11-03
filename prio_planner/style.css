@@ -6,7 +6,10 @@ body, h1, p, span, div, button, textarea {
 
 body {
   font-family: Arial, sans-serif;
-  background: url(img/bg.jpeg) no-repeat center center fixed;
+  background-image: url(./img/bg.jpeg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
   background-size: cover;
   color: #333;
   line-height: 1.6;
@@ -162,7 +165,7 @@ textarea {
 
 @media (max-width: 768px) {
   header img {
-      width: 75px;
+    width: 75px;
   }
 
   #content-container {
