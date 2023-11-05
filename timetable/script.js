@@ -15,24 +15,29 @@ const stopLoadingAnimation = () => {
   submitButton.style.cursor = "pointer";
 };
 
-const showResponse = (content) => {
+const showResponse = (timetable) => {
   responseContainer.style.display = "block";
+  responseContainer.innerHTML = "";
 
-  const parsedContent = JSON.parse(content);
-  let formattedContent = "<h2 class='list-heading'>Keep Task List:</h2>";
+  const table = document.createElement("table");
 
-  for (const task of parsedContent.keep_task_list) {
-    formattedContent += `- ${Object.keys(task)[0]}: ${Object.values(task)[0]}\n`;
+  const headerRow = table.insertRow(0);
+  const timeHeaderCell = headerRow.insertCell(0);
+  const taskHeaderCell = headerRow.insertCell(1);
+  timeHeaderCell.textContent = "Time";
+  taskHeaderCell.textContent = "Task";
+
+  for (let entry of timetable) {
+    const row = table.insertRow();
+    const timeCell = row.insertCell(0);
+    const taskCell = row.insertCell(1);
+    timeCell.textContent = entry.time;
+    taskCell.textContent = entry.task;
   }
 
-  formattedContent += "\n<h2 class='list-heading'>Drop Task List:</h2>";
-
-  for (const task of parsedContent.drop_task_list) {
-    formattedContent += `- ${Object.keys(task)[0]}: ${Object.values(task)[0]}\n`;
-  }
-
-  responseContainer.innerHTML = formattedContent;
+  responseContainer.appendChild(table);
 };
+
 
 submitButton.addEventListener("click", () => {
   startLoadingAnimation();
@@ -72,9 +77,6 @@ submitButton.addEventListener("click", () => {
 
       taskNames = taskNames.slice(0, -2);
 
-      stopLoadingAnimation();
-      showResponse(content);
-
       const secondRequestOptions = {
         method: 'POST',
         headers: myHeaders,
@@ -90,8 +92,13 @@ submitButton.addEventListener("click", () => {
     })
     .then(response => response.json())
     .then(secondResult => {
-      const secondContent = secondResult.content;
-      console.log(secondContent);
+      const content = secondResult.content;
+      const timetable = JSON.parse(content).timetable;
+
+      console.log(timetable);
+
+      showResponse(timetable);
+      stopLoadingAnimation();
     })
     .catch(error => {
       stopLoadingAnimation();
