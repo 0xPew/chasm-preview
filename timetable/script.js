@@ -60,6 +60,20 @@ submitButton.addEventListener("click", () => {
     .then(response => response.json())
     .then(result => {
       const content = result.content;
+
+      let keepTaskList = JSON.parse(content).keep_task_list;
+      let taskNames = "";
+
+      for (let taskObj of keepTaskList) {
+        for (let taskName in taskObj) {
+          taskNames += taskName + ", ";
+        }
+      }
+
+      taskNames = taskNames.slice(0, -2);
+
+      console.log(taskNames);
+
       stopLoadingAnimation();
       showResponse(content);
     })
