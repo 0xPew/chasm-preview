@@ -20,6 +20,7 @@ const showResponse = (timetable) => {
   responseContainer.innerHTML = "";
 
   const table = document.createElement("table");
+  table.classList.add("timetable");
 
   const headerRow = table.insertRow(0);
   const timeHeaderCell = headerRow.insertCell(0);

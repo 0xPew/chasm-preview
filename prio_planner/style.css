@@ -84,6 +84,10 @@ span {
   color: #fff;
 }
 
+.response-container {
+  font-size: 16px;
+}
+
 .circle-button {
   background-color: #333;
   color: #fff;
