@@ -72,10 +72,26 @@ submitButton.addEventListener("click", () => {
 
       taskNames = taskNames.slice(0, -2);
 
-      console.log(taskNames);
-
       stopLoadingAnimation();
       showResponse(content);
+
+      const secondRequestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: JSON.stringify({
+          "input": {
+            "verified_tasks": taskNames
+          }
+        }),
+        redirect: 'follow'
+      };
+
+      return fetch("https://pms.chasm.net/api/prompts/execute/224", secondRequestOptions);
+    })
+    .then(response => response.json())
+    .then(secondResult => {
+      const secondContent = secondResult.content;
+      console.log(secondContent);
     })
     .catch(error => {
       stopLoadingAnimation();
