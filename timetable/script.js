@@ -95,9 +95,6 @@ submitButton.addEventListener("click", () => {
     .then(secondResult => {
       const content = secondResult.content;
       const timetable = JSON.parse(content).timetable;
-
-      console.log(timetable);
-
       showResponse(timetable);
       stopLoadingAnimation();
     })
