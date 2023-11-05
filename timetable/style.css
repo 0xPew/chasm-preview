@@ -84,10 +84,6 @@ span {
   color: #fff;
 }
 
-.response-container {
-  font-size: 16px;
-}
-
 .circle-button {
   background-color: #333;
   color: #fff;
@@ -167,6 +163,21 @@ textarea {
   margin: 0;
 }
 
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid #000; 
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+}
+
+
 @media (max-width: 768px) {
   header img {
     width: 75px;
@@ -188,6 +199,10 @@ textarea {
 
   span {
     font-size: 14px;
+  }
+
+  .response-container {
+    font-size: 16px;
   }
 
   .circle-button {
