@@ -113,6 +113,7 @@ submitButton.addEventListener("click", () => {
   question2Container.style.display = "none";
   question3Container.style.display = "none";
   question4Container.style.display = "none";
+  responseContainer.style.display = "none";
   const inputValue = textInput.value;
   const myHeaders = new Headers();
 
