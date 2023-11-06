@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Infant:wght@700&family=Karla:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <title>Chasm Preview</title>
+</head>
+<body>
+  <section class="container">
+    <header>
+      <img alt="logo" src="img/logo.png">
+      <div>
+        <a href="mailto:hello@chasm.net"><span id="contact">Contact: hello@chasm.net</span></a>
+      </div>
+    </header>
+    <div id="content-container">
+      <h1>AI Emotional Support and Guidance</h1>
+      <p>Helps people navigate their emotions, offering empathetic and non-judgmental guidance and support.</p>
+      <div>
+        <span>Key in your worries:</span>
+        <div class="input-container">
+          <div class="input-box">
+            <input id="text-input" type="text" placeholder="Your worries">
+          </div>
+          <button id="submit" class="circle-button"><i class="fas fa-check"></i></button>
+        </div>
+      </div>
+      <div class="question-container" id="question1-container">
+        <div>
+          <p class="question" id="question1">Question 1</p>
+        </div>
+        <div class="answer-container">
+          <input type="text" id="answer1-input" class="answer-input" placeholder="Your answer...">
+          <button id="answer1-send-button" class="circle-button"><i class="fas fa-check"></i></button>
+        </div>
+      </div>
+      <div class="question-container" id="question2-container">
+        <div>
+          <p class="question" id="question2">Question 2</p>
+        </div>
+        <div class="answer-container">
+          <input type="text" id="answer2-input" class="answer-input" placeholder="Your answer...">
+          <button id="answer2-send-button" class="circle-button"><i class="fas fa-check"></i></button>
+        </div>
+      </div>
+      <div class="question-container" id="question3-container">
+        <div>
+          <p class="question" id="question3">Question 3</p>
+        </div>
+        <div class="answer-container">
+          <input type="text" id="answer3-input" class="answer-input" placeholder="Your answer...">
+          <button id="answer3-send-button" class="circle-button"><i class="fas fa-check"></i></button>
+        </div>
+      </div>
+      <div class="question-container" id="question4-container">
+        <div>
+          <p class="question" id="question4">Emotional Support and Guidance Choice:</p>
+        </div>
+        <div class="answer-container">
+          <select name="choice" id="choice">
+            <option value="advice">Advice</option>
+            <option value="listening ear">Listening Ear</option>
+            <option value="action steps">Action Steps</option>
+          </select>
+          <button id="answer4-send-button" class="circle-button"><i class="fas fa-check"></i></button>
+        </div>
+      </div>
+      <div id="response" class="response-container"></div>
+    </div>
+  </section>
+  <script src="script.js"></script>
+</body>
+</html>
