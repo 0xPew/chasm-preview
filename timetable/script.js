@@ -17,7 +17,6 @@ const stopLoadingAnimation = () => {
 
 const showResponse = (timetable) => {
   responseContainer.style.display = "block";
-  responseContainer.innerHTML = "";
 
   const table = document.createElement("table");
   table.classList.add("timetable");
@@ -65,7 +64,20 @@ submitButton.addEventListener("click", () => {
   fetch("https://pms.chasm.net/api/prompts/execute/204", requestOptions)
     .then(response => response.json())
     .then(result => {
+      responseContainer.style.display = "none";
       const content = result.content;
+
+      let dropTaskList = JSON.parse(content).drop_task_list;
+
+      console.log(dropTaskList);
+
+      const dropTask = dropTaskList.map(taskObject => Object.keys(taskObject)[0]).join(', ');
+
+      console.log(dropTask);
+
+      responseContainer.innerHTML = "Dropped task: " + dropTask + "\n\n";
+
+      console.log(responseContainer.innerHTML);
 
       let keepTaskList = JSON.parse(content).keep_task_list;
       let taskNames = "";
@@ -95,6 +107,7 @@ submitButton.addEventListener("click", () => {
     .then(secondResult => {
       const content = secondResult.content;
       const timetable = JSON.parse(content).timetable;
+
       showResponse(timetable);
       stopLoadingAnimation();
     })
