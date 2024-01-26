@@ -10,12 +10,12 @@ document.addEventListener("DOMContentLoaded", function () {
     myHeaders.append("Content-Type", "application/json");
     myHeaders.append(
       "Authorization",
-      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJiNGJiYmQzNS02ZGZiLTQ0ODgtOTc3Mi1mYjNhZTBmZjQ5NDIiLCJpYXQiOjE3MDQ3NjkyNjd9.b9_mO1YG4skoqo7-fxdoakrdHuTgOyK5AayfXR3hKrs"
+      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJiNGJiYmQzNS02ZGZiLTQ0ODgtOTc3Mi1mYjNhZTBmZjQ5NDIiLCJpYXQiOjE3MDYyNDAxMjR9.tkvr22GzrzGkEJAOJBISNSixOwFnUqLsVvus2KOI36o"
     );
 
     var raw = JSON.stringify({
       input: {
-        informations: "My cat is MiMi",
+        informations: "The cat's available for purchase is MiMi.",
         question: message,
       },
     });
@@ -30,7 +30,6 @@ document.addEventListener("DOMContentLoaded", function () {
     fetch("https://pms.chasm.net/api/workflows/execute/131", requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        console.log(result.output);
         displayMessage(result.output, "received");
       })
       .catch((error) => {
