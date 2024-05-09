@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
     myHeaders.append("Content-Type", "application/json");
     myHeaders.append(
       "Authorization",
-      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJiNGJiYmQzNS02ZGZiLTQ0ODgtOTc3Mi1mYjNhZTBmZjQ5NDIiLCJpYXQiOjE3MDYyNDAxMjR9.tkvr22GzrzGkEJAOJBISNSixOwFnUqLsVvus2KOI36o"
+      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI4ZDJiYWQ5Ni03ZTFlLTQxMGMtOTQwNC01MWVhODZiYTE3YmEiLCJpYXQiOjE3MTUyMjA2MTF9.PGv_vpHu84J407v6eVDBta57V8gzciZbzXpDlJ0AL0U"
     );
 
     var raw = JSON.stringify({

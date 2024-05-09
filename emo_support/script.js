@@ -52,7 +52,7 @@ const displayQuestions = (content) => {
   question2.innerHTML = parsedContent.question2;
   question3.innerHTML = parsedContent.question3;
   question1Container.style.display = "block";
-}
+};
 
 answer1Button.addEventListener("click", () => {
   question2Container.style.display = "block";
@@ -71,39 +71,56 @@ answer4Button.addEventListener("click", () => {
 
   const inputValue = textInput.value;
   const choiceValue = choice.value;
-  const questionsValue = "1. " + question1.innerHTML + " 2. " + question2.innerHTML + " 3. " + question3.innerHTML;
-  const responseValue = "1. " + answer1Input.value + " 2. " + answer2Input.value + " 3. " + answer3Input.value;
+  const questionsValue =
+    "1. " +
+    question1.innerHTML +
+    " 2. " +
+    question2.innerHTML +
+    " 3. " +
+    question3.innerHTML;
+  const responseValue =
+    "1. " +
+    answer1Input.value +
+    " 2. " +
+    answer2Input.value +
+    " 3. " +
+    answer3Input.value;
 
   const myHeaders = new Headers();
 
   myHeaders.append("Content-Type", "application/json");
+  myHeaders.append(
+    "Authorization",
+    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI4ZDJiYWQ5Ni03ZTFlLTQxMGMtOTQwNC01MWVhODZiYTE3YmEiLCJpYXQiOjE3MTUyMjA2MTF9.PGv_vpHu84J407v6eVDBta57V8gzciZbzXpDlJ0AL0U"
+  );
 
   const raw = JSON.stringify({
     input: {
       worries: inputValue,
       questions: questionsValue,
       response: responseValue,
-      choice: choiceValue
-    }
+      choice: choiceValue,
+    },
   });
 
   const requestOptions = {
-    method: 'POST',
+    method: "POST",
     headers: myHeaders,
     body: raw,
-    redirect: 'follow'
+    redirect: "follow",
   };
 
   fetch("https://pms.chasm.net/api/prompts/execute/222", requestOptions)
-    .then(response => response.json())
-    .then(result => {
+    .then((response) => response.json())
+    .then((result) => {
       const content = result.content;
       showResponse(content);
       stopLoadingAnimation("answer4Button");
     })
-    .catch(error => {
+    .catch((error) => {
       stopLoadingAnimation("answer4Button");
-      responseContainer.innerHTML = "<h2 class='list-heading'>Error, please try again later</h2>";
+      responseContainer.innerHTML =
+        "<h2 class='list-heading'>Error, please try again later</h2>";
     });
 });
 
@@ -122,25 +139,26 @@ submitButton.addEventListener("click", () => {
   const raw = JSON.stringify({
     input: {
       Worries: inputValue,
-    }
+    },
   });
 
   const requestOptions = {
-    method: 'POST',
+    method: "POST",
     headers: myHeaders,
     body: raw,
-    redirect: 'follow'
+    redirect: "follow",
   };
 
   fetch("https://pms.chasm.net/api/prompts/execute/221", requestOptions)
-    .then(response => response.json())
-    .then(result => {
+    .then((response) => response.json())
+    .then((result) => {
       const content = result.content;
       displayQuestions(content);
       stopLoadingAnimation("submitButton");
     })
-    .catch(error => {
+    .catch((error) => {
       stopLoadingAnimation("submitButton");
-      responseContainer.innerHTML = "<h2 class='list-heading'>Error, please try again later</h2>";
+      responseContainer.innerHTML =
+        "<h2 class='list-heading'>Error, please try again later</h2>";
     });
 });

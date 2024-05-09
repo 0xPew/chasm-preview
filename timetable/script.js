@@ -38,7 +38,6 @@ const showResponse = (timetable) => {
   responseContainer.appendChild(table);
 };
 
-
 submitButton.addEventListener("click", () => {
   startLoadingAnimation();
   const roleValue = roleInput.value;
@@ -46,24 +45,28 @@ submitButton.addEventListener("click", () => {
   const myHeaders = new Headers();
 
   myHeaders.append("Content-Type", "application/json");
+  myHeaders.append(
+    "Authorization",
+    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI4ZDJiYWQ5Ni03ZTFlLTQxMGMtOTQwNC01MWVhODZiYTE3YmEiLCJpYXQiOjE3MTUyMjA2MTF9.PGv_vpHu84J407v6eVDBta57V8gzciZbzXpDlJ0AL0U"
+  );
 
   const raw = JSON.stringify({
     input: {
       request: inputValue,
-      job_role: roleValue
-    }
+      job_role: roleValue,
+    },
   });
 
   const requestOptions = {
-    method: 'POST',
+    method: "POST",
     headers: myHeaders,
     body: raw,
-    redirect: 'follow'
+    redirect: "follow",
   };
 
   fetch("https://pms.chasm.net/api/prompts/execute/204", requestOptions)
-    .then(response => response.json())
-    .then(result => {
+    .then((response) => response.json())
+    .then((result) => {
       responseContainer.style.display = "none";
       const content = result.content;
 
@@ -71,7 +74,9 @@ submitButton.addEventListener("click", () => {
 
       console.log(dropTaskList);
 
-      const dropTask = dropTaskList.map(taskObject => Object.keys(taskObject)[0]).join(', ');
+      const dropTask = dropTaskList
+        .map((taskObject) => Object.keys(taskObject)[0])
+        .join(", ");
 
       console.log(dropTask);
 
@@ -91,28 +96,32 @@ submitButton.addEventListener("click", () => {
       taskNames = taskNames.slice(0, -2);
 
       const secondRequestOptions = {
-        method: 'POST',
+        method: "POST",
         headers: myHeaders,
         body: JSON.stringify({
-          "input": {
-            "verified_tasks": taskNames
-          }
+          input: {
+            verified_tasks: taskNames,
+          },
         }),
-        redirect: 'follow'
+        redirect: "follow",
       };
 
-      return fetch("https://pms.chasm.net/api/prompts/execute/224", secondRequestOptions);
+      return fetch(
+        "https://pms.chasm.net/api/prompts/execute/224",
+        secondRequestOptions
+      );
     })
-    .then(response => response.json())
-    .then(secondResult => {
+    .then((response) => response.json())
+    .then((secondResult) => {
       const content = secondResult.content;
       const timetable = JSON.parse(content).timetable;
 
       showResponse(timetable);
       stopLoadingAnimation();
     })
-    .catch(error => {
+    .catch((error) => {
       stopLoadingAnimation();
-      responseContainer.innerHTML = "<h2 class='list-heading'>Error, please try again later</h2>";
+      responseContainer.innerHTML =
+        "<h2 class='list-heading'>Error, please try again later</h2>";
     });
 });

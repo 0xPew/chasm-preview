@@ -29,7 +29,8 @@ const stopLoadingAnimation = (dotInterval) => {
 
 const showResponse = (chosenCard, content) => {
   responseContainer.style.display = "block";
-  responseContainer.textContent = "Card category: " + chosenCard + "\n\n" + content;
+  responseContainer.textContent =
+    "Card category: " + chosenCard + "\n\n" + content;
 };
 
 submitButton.addEventListener("click", () => {
@@ -58,29 +59,34 @@ submitButton.addEventListener("click", () => {
     "The Moon",
     "The Sun",
     "Judgement",
-    "The World"
+    "The World",
   ];
 
-  const chooseRandomCard = () => cards[Math.floor(Math.random() * cards.length)];
+  const chooseRandomCard = () =>
+    cards[Math.floor(Math.random() * cards.length)];
 
   const chosenCard = chooseRandomCard();
 
   const myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
+  myHeaders.append(
+    "Authorization",
+    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI4ZDJiYWQ5Ni03ZTFlLTQxMGMtOTQwNC01MWVhODZiYTE3YmEiLCJpYXQiOjE3MTUyMjA2MTF9.PGv_vpHu84J407v6eVDBta57V8gzciZbzXpDlJ0AL0U"
+  );
 
   const raw = JSON.stringify({
-    "input": {
-      "question": inputValue,
-      "name": chosenCard,
-      "json_only": "format the result in JSON Object"
-    }
+    input: {
+      question: inputValue,
+      name: chosenCard,
+      json_only: "format the result in JSON Object",
+    },
   });
 
   const requestOptions = {
-    method: 'POST',
+    method: "POST",
     headers: myHeaders,
     body: raw,
-    redirect: 'follow'
+    redirect: "follow",
   };
 
   fetch("https://pms.chasm.net/api/prompts/execute/31", requestOptions)
@@ -91,7 +97,7 @@ submitButton.addEventListener("click", () => {
       showResponse(chosenCard, content);
     })
     .catch((error) => {
-      console.log('error', error);
+      console.log("error", error);
       stopLoadingAnimation(dotInterval);
       submitButton.textContent = "Error";
     });
